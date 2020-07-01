@@ -1,0 +1,29 @@
+name: drspoiler-backend
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn db_init
+      - run: yarn test
+
+env:
+  CONNECTION_STRING: postgres://bxpczkjm:SxDY-NzeQAh4Hm7RvUY1bppDakI5GjJu@ruby.db.elephantsql.com:5432/bxpczkjm
