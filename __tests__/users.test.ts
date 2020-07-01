@@ -12,6 +12,10 @@ beforeAll(async () => {
   await pool.query('DELETE FROM main.users WHERE username = $1', [username])
 })
 
+afterAll(async () => {
+  await pool.end()
+})
+
 test('sign up with valid data', done => {
   request(app)
     .post('/api/signup')
