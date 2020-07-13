@@ -3,7 +3,7 @@ import app from '../src/app'
 import pool from '../src/database'
 
 const credentials = {
-  valid: { username: 'test', email: 'test@example.com', password: 'test' },
+  valid: { username: 'test', email: 'test@example.com', password: 'test123456' },
   invalid: { username: 'test1', email: 'test1@example', password: 'test1' }
 }
 
@@ -31,10 +31,9 @@ test('sign up with invalid data', done => {
   request(app)
     .post('/api/signup')
     .send(credentials.invalid)
-    .expect(400)
+    .expect(422)
     .end((err, res) => {
       if (err) return done(err)
-      expect(res.body.error).toBe('invalid email')
       done()
     })
 })

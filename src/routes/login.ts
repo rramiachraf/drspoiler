@@ -1,20 +1,23 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 import bcrypt from 'bcrypt'
+import { validationResult } from 'express-validator'
 import pool from '../database'
 import generateJWT from '../helpers/generateJWT'
+import { loginValidation } from '../helpers/schema'
 
 const route = Router()
 
-route.post('/login', async (req, res) => {
+route.post('/login', loginValidation, async (req: Request, res: Response) => {
   const genericError = 'Incorrect username or password'
   const query = `
     SELECT username, password, user_id FROM main.users
     WHERE username = $1
   `
+  const errors = validationResult(req)
 
   try {
-    if (!req.body.username || !req.body.password) {
-      throw Error('missing fields')
+    if (!errors.isEmpty()) {
+      throw Error(genericError)
     }
 
     const { rows, rowCount } = await pool.query(query, [req.body.username])

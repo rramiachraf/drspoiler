@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS main.communities(
     name VARCHAR(50) UNIQUE NOT NULL,
     work VARCHAR(100) NOT NULL,
     description VARCHAR(255),
-    picture VARCHAR(1500),
+    poster VARCHAR(1500),
     created_by INTEGER REFERENCES main.users(user_id) ON DELETE SET NULL,
     created_at TIMESTAMP DEFAULT now()
 );

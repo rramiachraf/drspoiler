@@ -1,49 +1,39 @@
-import { Router } from 'express'
+import { Router, Request, Response } from 'express'
 import bcrypt from 'bcrypt'
-import validator from 'validator'
+import { validationResult } from 'express-validator'
 import pool from '../database/index'
 import generateError from '../helpers/generateError'
+import { signupValidation } from '../helpers/schema'
 
 const route = Router()
 
-route.post('/signup', async (req, res) => {
-  const query = `
-    INSERT INTO 
-    main.users(username, email, password) 
-    VALUES($1, $2, $3)
-    RETURNING username
-  `
+const createNewUser = `
+  INSERT INTO 
+  main.users(username, email, password) 
+  VALUES($1, $2, $3)
+  RETURNING username
+`
+
+route.post('/signup', signupValidation, async (req: Request, res: Response) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(422).json(errors.array())
+  }
+
   const { username, email, password } = req.body
 
   try {
-    if (!username || !email || !password) {
-      throw Error('missing fields')
-    }
-
-    if (!validator.isEmail(email)) {
-      throw Error('invalid email')
-    }
-
-    if (!/^\w+$/.test(username)) {
-      throw Error('invalid username')
-    }
-
     const hashedPassword = await bcrypt.hash(password, 10)
-
-    const values = [
-      username.trim().toLowerCase(),
-      validator.normalizeEmail(email),
-      hashedPassword
-    ]
-
-    const { rows } = await pool.query(query, values)
+    const values = [username.toLowerCase(), email, hashedPassword]
+    const { rows } = await pool.query(createNewUser, values)
 
     res.status(201).send({
-      message: `Welcome ${rows[0].username}, your account has been created`
+      message: `welcome ${rows[0].username}, your account has been created`
     })
   } catch ({ message }) {
     res.status(400).send({ error: generateError(message) })
   }
+  
 })
 
 export default route
