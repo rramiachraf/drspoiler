@@ -14,10 +14,11 @@ config.update({
 export const s3 = new S3()
 
 export const uploadArtwork = multer({
-  fileFilter: async (req, { originalname }, cb) => {
+  fileFilter: (req, { originalname }, cb) => {
     // TODO check if the current user is the communiy administrator
     const format = /\.(jpeg|jpg|png)$/
     if (!format.test(originalname)) {
+      cb(null, false)
       cb(new Error("Images must be ('png', 'jpg', 'jpeg')"))
     }
     cb(null, true)
