@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import { uploadArtwork } from '../../aws/upload'
 import createCommunity from './createCommunity'
 import viewCommunity from './viewCommunity'
 import updatePoster from './updatePoster'
@@ -13,13 +12,7 @@ route.post('/', auth, createCommunity)
 
 route.get('/:community', viewCommunity)
 
-route.patch(
-  '/:community/update_poster',
-  auth,
-  communityExists,
-  uploadArtwork.single('poster'),
-  updatePoster
-)
+route.patch('/:community/update_poster', auth, communityExists, updatePoster)
 
 route.delete('/:community', auth, communityExists, deleteCommunity)
 
