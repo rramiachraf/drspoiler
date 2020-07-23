@@ -19,7 +19,7 @@ app.use('/api', login)
 app.use('/api/community', community)
 
 app.get('/*', (req, res) => {
-    res.status(404).send({error: 'endpoint does not exist'})
+  res.status(404).send({ error: 'endpoint does not exist' })
 })
 
 export default app

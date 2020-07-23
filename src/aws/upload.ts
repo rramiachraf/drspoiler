@@ -15,7 +15,6 @@ export const s3 = new S3()
 
 export const uploadArtwork = multer({
   fileFilter: async (req, { originalname }, cb) => {
-    // TODO check if the community exist
     // TODO check if the current user is the communiy administrator
     const format = /\.(jpeg|jpg|png)$/
     if (!format.test(originalname)) {
@@ -34,7 +33,7 @@ export const uploadArtwork = multer({
     acl: 'public-read',
     key: (req, { originalname }, cb) => {
       //@ts-ignore
-      const artworkKey = req.body.work + extname(originalname)
+      const artworkKey = req.params.community + extname(originalname)
       req.artworkKey = artworkKey
       cb(null, artworkKey)
     }

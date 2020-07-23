@@ -24,7 +24,7 @@ const createCommunity = async (req: Request, res: Response) => {
       description,
       userId
     ])
-    res.send({ message: `${rows[0].name} has been created.` })
+    res.send({ message: `${rows[0].name} has been created` })
   } catch ({ message }) {
     res.status(400).send({ error: generateError(message) })
   }

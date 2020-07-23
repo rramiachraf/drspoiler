@@ -6,6 +6,12 @@
     "outDir": "build",
     "strict": true,
     "typeRoots": ["@types", "./node_modules/@types"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@routes/*": ["routes/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@helpers/*": ["helpers/*"]
+    }
   }
 }
