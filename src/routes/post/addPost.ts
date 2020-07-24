@@ -28,7 +28,7 @@ const addPost = async (req: Request, res: Response) => {
       req.query.community,
       urlSlug
     ])
-    res.send({ postId: rows[0].post_id })
+    res.status(201).send({ postId: rows[0].post_id })
   } catch ({ message: error }) {
     res.status(400).send({ error })
   }
