@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS main.posts(
     body TEXT,
     author INTEGER NOT NULL REFERENCES main.users(user_id) ON DELETE CASCADE,
     community INTEGER NOT NULL REFERENCES main.communities(community_id) ON DELETE CASCADE,
+    url_slug VARCHAR(1500) NOT NULL,
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now()
 );

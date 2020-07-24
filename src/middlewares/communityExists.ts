@@ -11,9 +11,10 @@ const communityExists = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { community } = req.params
   try {
-    const { rowCount } = await pool.query(query, [community])
+    const { rowCount } = await pool.query(query, [
+      req.params.community || req.query.community
+    ])
     if (rowCount === 0) {
       throw Error('community not found')
     }

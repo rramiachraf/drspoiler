@@ -22,6 +22,11 @@ const password = body('password')
   .isLength({ min: 8 })
   .withMessage('password must be at least 8 characters')
 
+const title = body('title')
+  .not()
+  .isEmpty()
+  .withMessage('title must be provided')
+
 export const signupValidation = [email, username, password]
 
 export const loginValidation = [username, password]
