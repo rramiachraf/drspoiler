@@ -3,7 +3,6 @@ import multer from 'multer'
 import multerS3 from 'multer-s3'
 import { extname } from 'path'
 import { AWS_accessKeyId, AWS_secretAccessKey } from '../config'
-import pool from '../database'
 
 config.update({
   secretAccessKey: AWS_secretAccessKey,
@@ -15,7 +14,7 @@ export const s3 = new S3()
 
 export const uploadArtwork = multer({
   fileFilter: (req, { originalname }, cb) => {
-    // TODO check if the current user is the communiy administrator
+    // TODO check if the current user is the community administrator
     const format = /\.(jpeg|jpg|png)$/
     if (!format.test(originalname)) {
       cb(null, false)
@@ -40,3 +39,14 @@ export const uploadArtwork = multer({
     }
   })
 })
+
+export const deleteObject = (options: S3.DeleteObjectRequest) => {
+  return new Promise((resolve, reject) => {
+    s3.deleteObject(options, (err, data) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(data)
+    })
+  })
+}

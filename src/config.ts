@@ -12,16 +12,20 @@ declare const process: {
   }
 }
 
+// ENV
 const port = process.env.PORT || 5000
 const connectionString = process.env.CONNECTION_STRING
 const jwtSecret = process.env.JWT_SECRET
 const AWS_accessKeyId = process.env.AWS_ACCESS_KEY_ID
 const AWS_secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY
 
+const Bucket = 'drspoiler-artworks'
+
 export {
   port,
   connectionString,
   jwtSecret,
   AWS_accessKeyId,
-  AWS_secretAccessKey
+  AWS_secretAccessKey,
+  Bucket
 }

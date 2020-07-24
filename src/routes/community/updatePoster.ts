@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import pool from '../../database'
 import { uploadArtwork } from '../../aws/upload'
+import { Bucket } from '../../config'
 
 const upload = uploadArtwork.single('poster')
 
@@ -12,8 +13,7 @@ const query = `
 
 const updatePoster = (req: Request, res: Response) => {
   upload(req, res, async (err: any) => {
-    const bucket = 'drspoiler-artworks'
-    const url = `https://${bucket}.s3.amazonaws.com/${req.artworkKey}`
+    const url = `https://${Bucket}.s3.amazonaws.com/${req.artworkKey}`
     const { community } = req.params
     try {
       if (err) {
