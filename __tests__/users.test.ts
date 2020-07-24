@@ -18,7 +18,7 @@ afterAll(async () => {
 
 test('sign up with valid data', done => {
   request(app)
-    .post('/api/signup')
+    .post('/signup')
     .send(credentials.valid)
     .expect(201)
     .end(err => {
@@ -29,7 +29,7 @@ test('sign up with valid data', done => {
 
 test('sign up with invalid data', done => {
   request(app)
-    .post('/api/signup')
+    .post('/signup')
     .send(credentials.invalid)
     .expect(422)
     .end((err, res) => {
@@ -40,7 +40,7 @@ test('sign up with invalid data', done => {
 
 test('login with valid credentials', done => {
   request(app)
-    .post('/api/login')
+    .post('/login')
     .send(credentials.valid)
     .expect(200)
     .end(err => {
@@ -51,7 +51,7 @@ test('login with valid credentials', done => {
 
 test('login with invalid credentials', done => {
   request(app)
-    .post('/api/login')
+    .post('/login')
     .send(credentials.invalid)
     .expect(404)
     .end(err => {

@@ -15,10 +15,10 @@ app.use(helmet())
 
 app.use(express.json())
 
-app.use('/api', signup)
-app.use('/api', login)
-app.use('/api/community', community)
-app.use('/api/post', post)
+app.use('/', signup)
+app.use('/', login)
+app.use('/c', community)
+app.use('/p', post)
 
 app.get('/*', (req, res) => {
   res.status(404).send({ error: 'endpoint does not exist' })
