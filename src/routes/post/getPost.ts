@@ -15,12 +15,10 @@ const query = `
 
 const getPost = async (req: Request, res: Response) => {
   try {
-    console.log([req.params.postId, req.params.communityName])
     const { rowCount, rows } = await pool.query(query, [
       req.params.postId,
-      req.params.communityName
+      req.params.community
     ])
-    console.log(rows)
     if (rowCount === 0) {
       throw Error('post not found')
     }

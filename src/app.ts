@@ -10,7 +10,7 @@ import post from './routes/post'
 const app = express()
 
 app.use(cors())
-app.use(compression())
+app.use(compression({ level: 1 }))
 app.use(helmet())
 
 app.use(express.json())
