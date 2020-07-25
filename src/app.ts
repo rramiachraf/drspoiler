@@ -18,7 +18,7 @@ app.use(express.json())
 app.use('/', signup)
 app.use('/', login)
 app.use('/c', community)
-app.use('/p', post)
+app.use('/c', post)
 
 app.get('/*', (req, res) => {
   res.status(404).send({ error: 'endpoint does not exist' })

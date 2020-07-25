@@ -10,18 +10,23 @@ const query = `
     main.communities.community_id = main.communities.community_id
     INNER JOIN main.users ON 
     main.users.user_id = main.posts.author
-    WHERE post_id = $1
+    WHERE post_id = $1 AND LOWER(main.communities.name) = LOWER($2)
 `
 
 const getPost = async (req: Request, res: Response) => {
   try {
-    const { rowCount, rows } = await pool.query(query, [req.params.postId])
+    console.log([req.params.postId, req.params.communityName])
+    const { rowCount, rows } = await pool.query(query, [
+      req.params.postId,
+      req.params.communityName
+    ])
+    console.log(rows)
     if (rowCount === 0) {
       throw Error('post not found')
     }
     res.send(rows[0])
-  } catch (e) {
-    res.status(404).send()
+  } catch ({ message: error }) {
+    res.status(404).send({ error })
   }
 }
 

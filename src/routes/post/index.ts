@@ -7,6 +7,6 @@ import communityExists from '../../middlewares/communityExists'
 const route = Router()
 
 route.post('/', auth, communityExists, addPost)
-route.get('/:postId', getPost)
+route.get('/:communityName/p/:postId', getPost)
 
 export default route
