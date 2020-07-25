@@ -32,6 +32,7 @@ export const uploadArtwork = multer({
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: 'public-read',
     key: (req, { originalname }, cb) => {
+      // @ts-ignore
       const artworkKey = req.params.community + extname(originalname)
       req.artworkKey = artworkKey
       cb(null, artworkKey)
