@@ -11,11 +11,18 @@ const query = `
     INNER JOIN main.users ON 
     main.users.user_id = main.posts.author
     WHERE LOWER(main.communities.name) = LOWER($1)
+    ORDER BY main.posts.created_at DESC
+    LIMIT $2
+    OFFSET $3
 `
 
 const getPosts = async (req: Request, res: Response) => {
   try {
-    const { rows, rowCount } = await pool.query(query, [req.params.community])
+    const { rows, rowCount } = await pool.query(query, [
+      req.params.community,
+      req.query.limit || 10,
+      req.query.skip || 0
+    ])
     if (rowCount === 0) {
       throw Error('no post found in this comunity')
     }
