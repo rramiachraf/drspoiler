@@ -25,7 +25,7 @@ const addPost = async (req: Request, res: Response) => {
       title,
       body,
       req.userId,
-      req.query.community,
+      req.params.community,
       urlSlug
     ])
     res.status(201).send({ postId: rows[0].post_id })
