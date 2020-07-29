@@ -37,12 +37,14 @@ route.post('/login', loginValidation, async (req: Request, res: Response) => {
 
     const token = await generateJWT({ userId })
 
+    res.setHeader('Set-Cookie', `token=${token};Secure;HttpOnly;SameSite=Strict`)
+
     res.send({
       message: `Welcome back ${rows[0].username}`,
       token
     })
   } catch ({ message }) {
-    res.status(404).send({ message })
+    res.status(401).send({ message })
   }
 })
 

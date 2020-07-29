@@ -7,7 +7,7 @@ const query = `
     main.communities.name AS community, main.users.username AS author
     FROM main.posts
     INNER JOIN main.communities ON 
-    main.communities.community_id = main.communities.community_id
+    main.communities.community_id = main.posts.community
     INNER JOIN main.users ON 
     main.users.user_id = main.posts.author
     WHERE LOWER(main.communities.name) = LOWER($1)
@@ -24,7 +24,7 @@ const getPosts = async (req: Request, res: Response) => {
       req.query.skip || 0
     ])
     if (rowCount === 0) {
-      throw Error('no post found in this comunity')
+      throw Error('no post found in this community')
     }
     res.send(rows)
   } catch ({ message: error }) {

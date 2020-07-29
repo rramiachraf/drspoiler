@@ -53,7 +53,7 @@ test('login with invalid credentials', done => {
   request(app)
     .post('/login')
     .send(credentials.invalid)
-    .expect(404)
+    .expect(401)
     .end(err => {
       if (err) return done(err)
       done()

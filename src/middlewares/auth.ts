@@ -5,7 +5,6 @@ import pool from '../database'
 
 interface Decoded {
   userId: number
-  iat: number
 }
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
@@ -15,7 +14,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
     const query = 'SELECT username FROM main.users WHERE user_id = $1'
     const { rowCount } = await pool.query(query, [userId])
     if (rowCount === 0) {
-      throw Error('user not found')
+      throw Error
     }
     req.userId = userId
     next()
