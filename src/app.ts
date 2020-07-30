@@ -6,6 +6,7 @@ import signup from './routes/signup'
 import login from './routes/login'
 import community from './routes/community'
 import post from './routes/post'
+import user from './routes/user'
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use('/', signup)
 app.use('/', login)
 app.use('/c', community)
 app.use('/c', post)
+app.use('/u', user)
 
 app.get('/*', (req, res) => {
   res.status(404).send({ error: 'endpoint does not exist' })
