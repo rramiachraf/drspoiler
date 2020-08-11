@@ -28,3 +28,12 @@ CREATE TABLE IF NOT EXISTS main.posts(
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now()
 );
+
+CREATE TABLE IF NOT EXISTS main.comments(
+    comment_id SERIAL PRIMARY KEY,
+    text TEXT NOT NULL,
+    post_id INTEGER NOT NULL REFERENCES main.posts(post_id) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES main.users(user_id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT now(),
+    updated_at TIMESTAMP DEFAULT now()
+);

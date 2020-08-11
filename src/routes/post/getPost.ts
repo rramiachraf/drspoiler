@@ -3,14 +3,19 @@ import pool from '../../database'
 
 const query = `
     SELECT 
-    post_id, title, body, main.posts.created_at, updated_at, 
+    main.posts.post_id, title, body, 
+    main.posts.created_at, main.posts.updated_at,
+    COUNT(comment_id) AS no_comments,
     main.communities.name AS community, main.users.username AS author
     FROM main.posts
     INNER JOIN main.communities ON 
     main.communities.community_id = main.communities.community_id
     INNER JOIN main.users ON 
     main.users.user_id = main.posts.author
-    WHERE post_id = $1 AND LOWER(main.communities.name) = LOWER($2)
+    LEFT JOIN main.comments ON
+    main.comments.post_id = main.posts.post_id
+    WHERE main.posts.post_id = $1 AND LOWER(main.communities.name) = LOWER($2)
+    GROUP BY main.posts.post_id, main.communities.name, main.users.username
 `
 
 const getPost = async (req: Request, res: Response) => {

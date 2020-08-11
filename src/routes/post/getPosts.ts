@@ -3,7 +3,7 @@ import pool from '../../database'
 
 const query = `
     SELECT 
-    post_id, title, body, main.posts.created_at, updated_at, 
+    post_id, title, body, url_slug, main.posts.created_at, updated_at, 
     main.communities.name AS community, main.users.username AS author
     FROM main.posts
     INNER JOIN main.communities ON 

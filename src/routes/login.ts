@@ -2,7 +2,6 @@ import { Router, Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import { validationResult } from 'express-validator'
 import pool from '../database'
-import generateJWT from '../helpers/generateJWT'
 import { loginValidation } from '../helpers/schema'
 
 const route = Router()
@@ -11,7 +10,7 @@ route.post('/login', loginValidation, async (req: Request, res: Response) => {
   const genericError = 'Incorrect username or password'
   const query = `
     SELECT username, password, user_id FROM main.users
-    WHERE username = $1
+    WHERE LOWER(username) = LOWER($1)
   `
   const errors = validationResult(req)
 
@@ -21,6 +20,7 @@ route.post('/login', loginValidation, async (req: Request, res: Response) => {
     }
 
     const { rows, rowCount } = await pool.query(query, [req.body.username])
+
     if (rowCount === 0) {
       throw Error(genericError)
     }
@@ -33,15 +33,11 @@ route.post('/login', loginValidation, async (req: Request, res: Response) => {
       throw Error(genericError)
     }
 
-    const userId = rows[0].user_id
-
-    const token = await generateJWT({ userId })
-
-    res.setHeader('Set-Cookie', `token=${token};Secure;HttpOnly;SameSite=Strict`)
+    req.session!.userId = rows[0].user_id
+    req.session!.userAgent = req.header('user-agent')
 
     res.send({
-      message: `Welcome back ${rows[0].username}`,
-      token
+      message: `Welcome back ${rows[0].username}`
     })
   } catch ({ message }) {
     res.status(401).send({ message })

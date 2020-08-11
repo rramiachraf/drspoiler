@@ -12,6 +12,7 @@
       "@routes/*": ["routes/*"],
       "@middlewares/*": ["middlewares/*"],
       "@helpers/*": ["helpers/*"]
-    }
+    },
+    "noEmitOnError": true
   }
 }

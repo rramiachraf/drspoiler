@@ -24,7 +24,7 @@ const addPost = async (req: Request, res: Response) => {
     const { rows } = await pool.query(query, [
       title,
       body,
-      req.userId,
+      req.session!.userId,
       req.params.community,
       urlSlug
     ])
