@@ -1,29 +1,28 @@
 _type: export
 __export_format: 4
-__export_date: 2020-07-26T15:46:54.971Z
+__export_date: 2020-08-12T12:56:15.864Z
 __export_source: insomnia.desktop.app:v2020.3.3
 resources:
-  - _id: req_6af885ad3bc44e2cacc113f828ce97d8
-    authentication:
-      token: "{{ auth_token }}"
-      type: bearer
+  - _id: req_76c81567815b430b98ccd00e04506373
+    authentication: {}
     body:
       mimeType: application/json
       text: |-
         {
-        	"title": "validating can be troublesome sometimes"
+        	"username": "AiNGthEd",
+        	"password": "1598753A"
         }
-    created: 1595598624382
+    created: 1593009617817
     description: ""
     headers:
-      - id: pair_46a4fee6058844b08007e5d6c7f0bdfd
+      - id: pair_08711ec4ff05462382bf2953aa982b48
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1595763918250
+    metaSortKey: -1595997862509.375
     method: POST
-    modified: 1595765706652
-    name: Add Post
+    modified: 1596646824169
+    name: Login
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
     settingDisableRenderRequestBody: false
@@ -32,7 +31,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{url}}/c/attackontitan/p"
+    url: "{{url}}/login"
     _type: request
   - _id: fld_9824e4c325c0404191c57ef1cfcb790b
     created: 1593009600431
@@ -52,69 +51,27 @@ resources:
     parentId: null
     scope: null
     _type: workspace
-  - _id: req_6391feb49fb440129a496933c2ff4ebc
+  - _id: req_0e75a9d833ed40028dce1a2d273eee6f
     authentication: {}
-    body: {}
-    created: 1595618665218
-    description: ""
-    headers: []
-    isPrivate: false
-    metaSortKey: -1595763918237.5
-    method: GET
-    modified: 1595771007190
-    name: Get Post
-    parameters: []
-    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{url}}/c/attackontitan/p/10"
-    _type: request
-  - _id: req_3e9b47ae20ec413e85a87348321425c5
-    authentication: {}
-    body: {}
-    created: 1595684498479
-    description: ""
-    headers: []
-    isPrivate: false
-    metaSortKey: -1595763918225
-    method: GET
-    modified: 1595765710086
-    name: Get Posts
-    parameters: []
-    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{url}}/c/attackontitan/posts"
-    _type: request
-  - _id: req_8ac9b38b92604b04a82ed2a27107336c
-    authentication:
-      token: "{{auth_token}}"
-      type: bearer
     body:
       mimeType: application/json
       text: |-
         {
-        	"body": "this is an update"
+        	"username": "AiNGthEd",
+        	"email": "jackson@email.me",
+        	"password": "1598753A"
         }
-    created: 1595777727636
+    created: 1593349220499
     description: ""
     headers:
-      - id: pair_4a2aefcda30645619957fb696fc2b574
+      - id: pair_27ca8a5402f24d65bf2339f0a3d6fe0a
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1595763918212.5
-    method: PATCH
-    modified: 1595777791419
-    name: Update Post
+    metaSortKey: -1596044651361.25
+    method: POST
+    modified: 1596480826783
+    name: Signup
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
     settingDisableRenderRequestBody: false
@@ -123,30 +80,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{url}}/c/attackontitan/p/10"
-    _type: request
-  - _id: req_7c0c2a9fff20407ea6b2ee815c34af23
-    authentication:
-      token: "{{ auth_token }}"
-      type: bearer
-    body: {}
-    created: 1595763918200
-    description: ""
-    headers: []
-    isPrivate: false
-    metaSortKey: -1595763918200
-    method: DELETE
-    modified: 1595770281436
-    name: Delete Post
-    parameters: []
-    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingFollowRedirects: global
-    settingRebuildPath: true
-    settingSendCookies: true
-    settingStoreCookies: true
-    url: "{{url}}/c/attackontitan/p/8"
+    url: "{{url}}/signup"
     _type: request
   - _id: req_2a7e26db61704198a666e80d2e9a0081
     authentication:
@@ -154,10 +88,11 @@ resources:
       type: bearer
     body:
       mimeType: application/json
-      text: |-
+      text: >-
         {
-        	"name": "AttackOnTitan",
-        	"work": "Attack On Titan"
+        	"name": "OnePiece",
+        	"work": "One Piece",
+        	"description": " Follows the adventures of Monkey D. Luffy and his pirate crew in order to find the greatest treasure ever left by the legendary Pirate, Gold Roger. The famous mystery treasure named \"One Piece\". "
         }
     created: 1593461707409
     description: ""
@@ -168,7 +103,7 @@ resources:
     isPrivate: false
     metaSortKey: -1595211409511.5
     method: POST
-    modified: 1595765715429
+    modified: 1596122944237
     name: Create Community
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
@@ -189,7 +124,7 @@ resources:
     isPrivate: false
     metaSortKey: -1594935155167.25
     method: GET
-    modified: 1595765717655
+    modified: 1596122934441
     name: View Community
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
@@ -199,7 +134,7 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{url}}/c/attackontitan"
+    url: "{{url}}/c/OnePiece"
     _type: request
   - _id: req_5534ec54f1a24cec94b1aab73008c147
     authentication:
@@ -223,7 +158,7 @@ resources:
     isPrivate: false
     metaSortKey: -1594658900823
     method: PATCH
-    modified: 1595618213334
+    modified: 1595965186411
     name: Update Poster
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
@@ -258,26 +193,28 @@ resources:
     settingStoreCookies: true
     url: "{{url}}/c/attackontitan"
     _type: request
-  - _id: req_76c81567815b430b98ccd00e04506373
-    authentication: {}
+  - _id: req_6af885ad3bc44e2cacc113f828ce97d8
+    authentication:
+      token: "{{ auth_token }}"
+      type: bearer
     body:
       mimeType: application/json
       text: |-
         {
-        	"username": "achraf",
-        	"password": "123456abc@"
+        	"title": "testing duplicate",
+        	"body": "a lot of stuff bro"
         }
-    created: 1593009617817
+    created: 1595598624382
     description: ""
     headers:
-      - id: pair_08711ec4ff05462382bf2953aa982b48
+      - id: pair_46a4fee6058844b08007e5d6c7f0bdfd
         name: Content-Type
         value: application/json
     isPrivate: false
-    metaSortKey: -1593009617817
+    metaSortKey: -1595763918250
     method: POST
-    modified: 1595618154969
-    name: Login
+    modified: 1597066460204
+    name: Add Post
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
     settingDisableRenderRequestBody: false
@@ -286,29 +223,19 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{url}}/login"
+    url: "{{url}}/c/attackontitan/p"
     _type: request
-  - _id: req_0e75a9d833ed40028dce1a2d273eee6f
+  - _id: req_6391feb49fb440129a496933c2ff4ebc
     authentication: {}
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"username": "achraf",
-        	"email": "achraf@example.me",
-        	"password": "123456abc@"
-        }
-    created: 1593349220499
+    body: {}
+    created: 1595618665218
     description: ""
-    headers:
-      - id: pair_27ca8a5402f24d65bf2339f0a3d6fe0a
-        name: Content-Type
-        value: application/json
+    headers: []
     isPrivate: false
-    metaSortKey: -1593009617767
-    method: POST
-    modified: 1595618161672
-    name: Signup
+    metaSortKey: -1595962770870.4688
+    method: GET
+    modified: 1597068020367
+    name: Get Post
     parameters: []
     parentId: fld_9824e4c325c0404191c57ef1cfcb790b
     settingDisableRenderRequestBody: false
@@ -317,13 +244,201 @@ resources:
     settingRebuildPath: true
     settingSendCookies: true
     settingStoreCookies: true
-    url: "{{url}}/signup"
+    url: "{{url}}/c/attackontitan/p/18"
+    _type: request
+  - _id: req_3e9b47ae20ec413e85a87348321425c5
+    authentication: {}
+    body: {}
+    created: 1595684498479
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1595951073657.5
+    method: GET
+    modified: 1596138648259
+    name: Get Posts
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/c/attackontitan/posts"
+    _type: request
+  - _id: req_7c0c2a9fff20407ea6b2ee815c34af23
+    authentication:
+      token: "{{ auth_token }}"
+      type: bearer
+    body: {}
+    created: 1595763918200
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1595763918200
+    method: DELETE
+    modified: 1595770281436
+    name: Delete Post
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/c/attackontitan/p/8"
+    _type: request
+  - _id: req_8ac9b38b92604b04a82ed2a27107336c
+    authentication:
+      token: "{{auth_token}}"
+      type: bearer
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"body": "this is an update"
+        }
+    created: 1595777727636
+    description: ""
+    headers:
+      - id: pair_4a2aefcda30645619957fb696fc2b574
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1595763918212.5
+    method: PATCH
+    modified: 1596646609144
+    name: Update Post
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/c/attackontitan/p/11"
+    _type: request
+  - _id: req_d1e75466d7f64fcaaf85488bd89c39d9
+    authentication: {}
+    body: {}
+    created: 1596138229064
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1595974468083.4375
+    method: GET
+    modified: 1596138656573
+    name: Get User
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/u/achraf"
+    _type: request
+  - _id: req_833ac276b6464435bbe5a6207c6fb695
+    authentication: {}
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"text": ":D"
+        }
+    created: 1596394442176
+    description: ""
+    headers:
+      - id: pair_b1dc5fa6a20f44f991383c5828351269
+        name: Content-Type
+        value: application/json
+    isPrivate: false
+    metaSortKey: -1596394442177
+    method: POST
+    modified: 1597067146106
+    name: Add Comment
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/p/18/comment"
+    _type: request
+  - _id: req_21c53fdfd95c4151be18ca4f3b20de26
+    authentication: {}
+    body: {}
+    created: 1596394709775
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1596394709775
+    method: GET
+    modified: 1597087056744
+    name: Get Comments
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/p/18/comments"
+    _type: request
+  - _id: req_42ead9d398eb4b1c92bdd2c5d2b6d7b2
+    authentication: {}
+    body: {}
+    created: 1596651758173
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1596651758174
+    method: POST
+    modified: 1596651768168
+    name: Logout
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/logout"
+    _type: request
+  - _id: req_10185a816b9243398ba1783a7551dca1
+    authentication: {}
+    body: {}
+    created: 1596999751307
+    description: ""
+    headers: []
+    isPrivate: false
+    metaSortKey: -1596999751307
+    method: DELETE
+    modified: 1596999795615
+    name: Remove Comment
+    parameters: []
+    parentId: fld_9824e4c325c0404191c57ef1cfcb790b
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingFollowRedirects: global
+    settingRebuildPath: true
+    settingSendCookies: true
+    settingStoreCookies: true
+    url: "{{url}}/p/13/comment/43"
     _type: request
   - _id: env_39637de70aad46345923d4ef24e180fc5cf72bf8
     color: null
     created: 1592139206674
     data:
-      auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTU5NTYxNTM0OH0.G2iPxBrrqr4aKEJda97wJbOWVw4TKMh_JxcVjZLEdTQ
+      auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5LCJpYXQiOjE1OTY0ODE2MDMsImV4cCI6MTU5NjU2ODAwM30.vhLEz8_qSxwuSqhZlU2aS7XMJ__Xt57KqiKwesIEoBk
       url: http://localhost:5000
     dataPropertyOrder:
       "&":
@@ -331,14 +446,26 @@ resources:
         - auth_token
     isPrivate: false
     metaSortKey: 1592139206674
-    modified: 1595615365200
+    modified: 1596481939659
     name: Base Environment
     parentId: wrk_861e6489f6bc4ad2bb9c4b33af47ff29
     _type: environment
   - _id: jar_39637de70aad46345923d4ef24e180fc5cf72bf8
-    cookies: []
+    cookies:
+      - creation: 2020-08-10T18:35:43.135Z
+        domain: localhost
+        expires: 2020-08-13T12:05:57.000Z
+        extensions:
+          - SameSite=Strict
+        hostOnly: true
+        httpOnly: true
+        id: "5365910598186534"
+        key: sid
+        lastAccessed: 2020-08-12T12:05:57.412Z
+        path: /
+        value: s%3A4on-jFEEzy8DfS7qcQ5b_yft1x2TLedV.fINhgs8GVTjMoq2NUPIf8NsJy7qFh7yPRadwbrLy3UM
     created: 1592139206680
-    modified: 1595765625279
+    modified: 1597233957412
     name: Default Jar
     parentId: wrk_861e6489f6bc4ad2bb9c4b33af47ff29
     _type: cookie_jar
