@@ -12,6 +12,8 @@ import community from './routes/community'
 import post from './routes/post'
 import user from './routes/user'
 import comment from './routes/comments'
+import logged from './routes/user/logged'
+import auth from './middlewares/auth'
 
 const app = express()
 
@@ -43,6 +45,8 @@ app.use('/c', community)
 app.use('/c', post)
 app.use('/u', user)
 app.use('/p', comment)
+
+app.get('/logged', auth, logged)
 
 app.get('/*', (req, res) => {
   res.status(404).send({ error: 'endpoint does not exist' })
