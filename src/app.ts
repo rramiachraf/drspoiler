@@ -33,7 +33,7 @@ app.use(
 )
 
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
-app.use(compression({ level: 1 }))
+app.use(compression({ level: 9 }))
 app.use(helmet())
 
 app.use(express.json())

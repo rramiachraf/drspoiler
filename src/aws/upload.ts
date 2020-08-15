@@ -33,7 +33,7 @@ export const uploadArtwork = multer({
     acl: 'public-read',
     key: (req, { originalname }, cb) => {
       // @ts-ignore
-      const artworkKey = req.params.community + extname(originalname)
+      const artworkKey = req.params.community.toLowerCase()
       req.artworkKey = artworkKey
       cb(null, artworkKey)
     }
@@ -43,6 +43,19 @@ export const uploadArtwork = multer({
 export const deleteObject = (options: S3.DeleteObjectRequest) => {
   return new Promise((resolve, reject) => {
     s3.deleteObject(options, (err, data) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(data)
+    })
+  })
+}
+
+export const getObject = (
+  options: S3.GetObjectRequest
+): Promise<S3.GetObjectOutput> => {
+  return new Promise((resolve, reject) => {
+    s3.getObject(options, (err, data) => {
       if (err) {
         reject(err)
       }

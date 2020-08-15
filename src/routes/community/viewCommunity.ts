@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import pool from '../../database/index'
 
 const getCommunityInfo = `
-    SELECT name, work, description, poster, created_at 
+    SELECT name, work, description, created_at 
     FROM main.communities 
     WHERE LOWER(name) = LOWER($1)
 `
