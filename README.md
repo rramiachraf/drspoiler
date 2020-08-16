@@ -6,9 +6,13 @@ The worst website on the internet.
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 ### Environment Variables
+#### Server:
 
 CONNECTION_STRING: A valid postgreSQL connection string
 
 AWS_ACCESS_KEY_ID: AWS Key
 
 AWS_SECRET_ACCESS_KEY: AWS Secret Key
+
+#### Client:
+API_URL: The REST API URL
