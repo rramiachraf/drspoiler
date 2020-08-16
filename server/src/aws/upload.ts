@@ -1,7 +1,6 @@
 import { config, S3 } from 'aws-sdk'
 import multer from 'multer'
-import multerS3 from 'multer-s3'
-import { extname } from 'path'
+import S3Storage from 'multer-sharp-s3'
 import { AWS_accessKeyId, AWS_secretAccessKey } from '../config'
 
 config.update({
@@ -26,14 +25,17 @@ export const uploadArtwork = multer({
     fileSize: 1000000,
     files: 1
   },
-  storage: multerS3({
+  storage: S3Storage({
     s3,
-    bucket: 'drspoiler-artworks',
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    acl: 'public-read',
-    key: (req, { originalname }, cb) => {
-      // @ts-ignore
-      const artworkKey = req.params.community.toLowerCase()
+    Bucket: 'drspoiler-artworks',
+    resize: {
+      width: 200,
+      height: 290
+    },
+    toFormat: 'jpg',
+    ACL: 'public-read',
+    Key: (req: any, file: any, cb: any) => {
+      const artworkKey = req.params.community
       req.artworkKey = artworkKey
       cb(null, artworkKey)
     }

@@ -13,7 +13,7 @@ const query = `
 
 const updatePoster = (req: Request, res: Response) => {
   upload(req, res, async (err: any) => {
-    const url = `https://${Bucket}.s3.amazonaws.com/${req.artworkKey}`
+    const url = req.artworkKey
     const { community } = req.params
     try {
       if (err) {

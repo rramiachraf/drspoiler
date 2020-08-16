@@ -32,7 +32,12 @@ app.use(
   })
 )
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000', /^http:\/\/\w+\.ngrok.io$/]
+  })
+)
 app.use(compression({ level: 9 }))
 app.use(helmet())
 

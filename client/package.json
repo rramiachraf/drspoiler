@@ -1,0 +1,40 @@
+{
+  "name": "drspoiler-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "dayjs": "^1.8.30",
+    "formik": "^2.1.5",
+    "next": "9.4.4",
+    "nprogress": "^0.2.0",
+    "polished": "^3.6.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-icons": "^3.10.0",
+    "react-loader-spinner": "^3.1.14",
+    "react-modal": "^3.11.2",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.29.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.24",
+    "@types/nprogress": "^0.2.0",
+    "@types/react": "^16.9.43",
+    "@types/react-loader-spinner": "^3.1.0",
+    "@types/react-modal": "^3.10.6",
+    "@types/react-redux": "^7.1.9",
+    "@types/redux-logger": "^3.0.8",
+    "@types/yup": "^0.29.4",
+    "typescript": "^3.9.7"
+  }
+}
