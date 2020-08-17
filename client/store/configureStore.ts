@@ -1,9 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import comments from '../reducers/comments'
-import logged from '../reducers/logged'
-import user from '../reducers/user'
+import comments from '@reducers/comments'
+import posts from '@reducers/posts'
+import logged from '@reducers/logged'
+import user from '@reducers/user'
 
 interface newWindow extends Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any
@@ -24,4 +25,4 @@ const enhancer = composeEnhancers(
 )
 
 export default () =>
-  createStore(combineReducers({ comments, logged, user }), enhancer)
+  createStore(combineReducers({ comments, logged, user, posts }), enhancer)

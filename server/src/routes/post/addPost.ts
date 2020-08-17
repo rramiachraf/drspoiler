@@ -10,7 +10,10 @@ const query = `
     ( SELECT community_id FROM main.communities WHERE LOWER(name) = LOWER($4) ),
     $5
     )
-    RETURNING post_id
+    RETURNING post_id, 
+    title, body, 
+    (SELECT username FROM main.users WHERE user_id = author) AS author, 
+    url_slug, created_at
 `
 
 const addPost = async (req: Request, res: Response) => {
@@ -28,7 +31,7 @@ const addPost = async (req: Request, res: Response) => {
       req.params.community,
       urlSlug
     ])
-    res.status(201).send({ postId: rows[0].post_id })
+    res.status(201).send(rows[0])
   } catch ({ message: error }) {
     res.status(400).send({ error })
   }

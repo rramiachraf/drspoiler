@@ -1,10 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 import ErrorPage from '../404'
 import PostContainer from '@components/Post'
 import CommunityLayout from '@components/CommunityLayout'
 import NewPost from '@components/NewPost'
-import { Community, Post } from '@types'
+import { Community, Post, State } from '@types'
+import { setPosts } from '@actions/posts'
 
 interface Props {
   community: Community
@@ -13,11 +16,24 @@ interface Props {
   posts: Post[]
 }
 
-const CommunityPage = ({ community, communityStatus, posts }: Props) => {
+const CommunityPage = ({
+  community,
+  communityStatus,
+  posts: prePosts
+}: Props) => {
+  const dispatch = useDispatch()
+  const posts = useSelector((state: State) => state.posts)
+
   const { name } = community
+
   if (communityStatus === 404) {
     return <ErrorPage />
   }
+
+  useEffect(() => {
+    dispatch(setPosts(prePosts))
+  }, [])
+  
   return (
     <>
       <Head>

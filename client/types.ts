@@ -35,5 +35,6 @@ export interface User {
 export interface State {
   comments: Comment[]
   logged: boolean | null
-  user: User
+  user: User,
+  posts: Post[]
 }

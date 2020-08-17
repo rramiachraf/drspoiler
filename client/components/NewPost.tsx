@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import Button from './Button'
 import StandardInput from './Input'
 import { lightGreenGray, lightShadow, primary } from '@colors'
 import { State } from '@types'
+import { addPostAsync } from '@actions/posts'
+import { useRouter } from 'next/router'
 
 const validationSchema = Yup.object({
   title: Yup.string().required('This field is required'),
@@ -64,6 +66,8 @@ export default () => {
 }
 
 const AddPostForm = () => {
+  const dispatch = useDispatch()
+  const { community } = useRouter().query
   const initialValues = {
     title: '',
     body: ''
@@ -73,7 +77,7 @@ const AddPostForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        console.log(values)
+        dispatch(addPostAsync(community!, values))
       }}
     >
       {({ isSubmitting, errors }) => (

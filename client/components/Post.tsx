@@ -42,8 +42,8 @@ export default ({
           <h1 className="title">{title}</h1>
         </Link>
         <p className="body">
-          {body.slice(0, 300)}
-          {body.length > 300 && '...'}
+          {body && body.slice(0, 300)}
+          {body && body.length > 300 && '...'}
         </p>
       </div>
       <p>{no_comments}</p>

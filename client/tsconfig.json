@@ -19,6 +19,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@actions/*": ["actions/*"],
+      "@reducers/*": ["reducers/*"],
       "@helpers/*": ["helpers/*"],
       "@types": ["types.ts"],
       "@colors": ["styles/colors.ts"]
