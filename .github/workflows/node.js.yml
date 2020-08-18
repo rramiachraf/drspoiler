@@ -15,7 +15,7 @@ jobs:
         node-version: [14.x]
 
     defaults:
-      runs:
+      run:
         working-directory: ./server
 
     steps:
