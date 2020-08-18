@@ -14,13 +14,16 @@ jobs:
       matrix:
         node-version: [14.x]
 
+    defaults:
+      runs:
+        working-directory: ./server
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - working-directory: ./server
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn db_init
