@@ -5,23 +5,16 @@ import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 import Button from './Button'
 import StandardInput from './Input'
-import { lightGreenGray, lightShadow, primary } from '@colors'
+import { primary } from '@colors'
 import { State } from '@types'
 import { addPostAsync } from '@actions/posts'
 import { useRouter } from 'next/router'
+import Card from './Card'
 
 const validationSchema = Yup.object({
   title: Yup.string().required('This field is required'),
   body: Yup.string()
 })
-
-const NewPost = styled.div`
-  padding: 1rem;
-  border: 1px solid ${lightGreenGray};
-  background: white;
-  border-radius: 3px;
-  box-shadow: 0 0 2px ${lightShadow};
-`
 
 const Input = StandardInput.withComponent(Field)
 
@@ -41,6 +34,12 @@ const ShowForm = styled.div`
   color: ${primary};
   font-weight: 500;
   border-radius: 3px;
+  transition: 0.3s background ease;
+  &:hover {
+    border: 2px solid transparent;
+    color: white;
+    background: ${primary};
+  }
 `
 
 const StyledForm = styled(Form)`
@@ -58,16 +57,16 @@ export default () => {
     return <></>
   }
   return (
-    <NewPost>
+    <Card>
       {!visible && <ShowForm onClick={handleToggleVisible}>Add Post</ShowForm>}
       {visible && <AddPostForm />}
-    </NewPost>
+    </Card>
   )
 }
 
 const AddPostForm = () => {
   const dispatch = useDispatch()
-  const { community } = useRouter().query
+  const community = useRouter().query.community as string
   const initialValues = {
     title: '',
     body: ''
@@ -77,7 +76,7 @@ const AddPostForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        dispatch(addPostAsync(community!, values))
+        dispatch(addPostAsync(community!, values, actions))
       }}
     >
       {({ isSubmitting, errors }) => (

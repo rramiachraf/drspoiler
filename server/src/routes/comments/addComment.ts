@@ -1,31 +1,24 @@
 import { Request, Response } from 'express'
 import pool from '../../database'
 
-const insertComment = `
+const query = `
     INSERT INTO main.comments (text, post_id, user_id)
     VALUES($1, $2, $3)
-    RETURNING comment_id
-`
-
-const getComment = `
-    SELECT comment_id, text, username, post_id,
-    main.comments.created_at AS created_at, 
-    main.comments.updated_at as updated_at
-    FROM main.comments
-    INNER JOIN main.users ON main.users.user_id = main.comments.user_id
-    WHERE post_id = $1 AND comment_id = $2
+    RETURNING 
+    comment_id, 
+    text,
+    post_id,
+    (SELECT username FROM main.users WHERE user_id = user_id) AS username, 
+    created_at, 
+    updated_at
 `
 
 const addComment = async (req: Request, res: Response) => {
   try {
-    const { rows: added } = await pool.query(insertComment, [
+    const { rows } = await pool.query(query, [
       req.body.text,
       req.params.postId,
       req.session!.userId
-    ])
-    const { rows } = await pool.query(getComment, [
-      req.params.postId,
-      added[0].comment_id
     ])
     res.status(201).send(rows[0])
   } catch ({ message: error }) {

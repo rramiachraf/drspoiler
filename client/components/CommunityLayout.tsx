@@ -1,6 +1,7 @@
 import Header from './Header'
 import About from './About'
 import { Community } from '@types'
+import { secondary } from '@colors'
 
 interface Props {
   community: Community
@@ -42,6 +43,7 @@ export default ({ community, content }: Props) => {
             width: 20rem;
             height: 29rem;
             border-radius: 3px;
+            background-color: white;
             background-image: url(${poster});
             background-size: cover;
           }

@@ -17,7 +17,7 @@ const deletePost = async (req: Request, res: Response) => {
     const { rows, rowCount } = await pool.query(query, [
       req.params.postId,
       req.params.community,
-      req.userId
+      req.session!.userId
     ])
     if (rowCount === 0) {
       throw Error('post not found')

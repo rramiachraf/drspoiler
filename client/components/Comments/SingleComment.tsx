@@ -6,6 +6,7 @@ import { Comment, State } from '@types'
 import relativeTime from '@helpers/relativeTime'
 import { secondary, darkGray, tertiary, lightGreenGray, danger } from '@colors'
 import Button from '@components/Button'
+import Card from '@components/Card'
 
 const DeleteButton = styled(Button)`
   font-size: 1rem;
@@ -18,18 +19,13 @@ const DeleteButton = styled(Button)`
   }
 `
 
-const CommentContainer = styled.div`
-  padding: 1rem;
-  border: 1px solid ${lightGreenGray};
-  border-radius: 3px;
-`
-
 const Commented = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   font-size: 1.2rem;
   color: ${secondary};
   font-weight: 500;
+  margin-bottom: 0.5rem;
 `
 
 const Options = styled.div`
@@ -61,6 +57,7 @@ const Author = styled.span`
 const Text = styled.p`
   font-size: 1.4rem;
   color: ${darkGray};
+  white-space: pre-line;
 `
 
 interface SingleCommentProps {
@@ -81,7 +78,7 @@ export default ({ comment, op, deleteComment }: SingleCommentProps) => {
 
   const stateUsername = useSelector(({ user }: State) => user.username)
   return (
-    <CommentContainer>
+    <Card>
       <Commented>
         <div>
           <Author op={op}>u/{username}</Author>
@@ -104,6 +101,6 @@ export default ({ comment, op, deleteComment }: SingleCommentProps) => {
           margin: 0 0.3rem;
         }
       `}</style>
-    </CommentContainer>
+    </Card>
   )
 }

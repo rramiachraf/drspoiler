@@ -5,20 +5,16 @@ import SingleComment from './SingleComment'
 import { removeCommentAsync } from '@actions/comments'
 import { Comment, State } from '@types'
 import { primary, darkGray, lightGreenGray, lightShadow } from '@colors'
+import Card from '../Card'
 
 interface Props {
   comments: Comment[]
   op: string
 }
 
-const CommentsBox = styled.div`
-  padding: 1rem;
-  border: 1px solid ${lightGreenGray};
-  border-radius: 3px;
-  background: white;
+const CommentsBox = styled(Card)`
   display: grid;
   gap: 0.3rem;
-  box-shadow: 0 0 2px ${lightShadow};
   h2 {
     color: ${primary};
     text-transform: uppercase;

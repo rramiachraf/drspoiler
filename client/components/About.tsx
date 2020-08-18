@@ -1,6 +1,13 @@
 import dayjs from 'dayjs'
-import { primary, secondary, darkGray } from '../styles/colors'
 import Link from 'next/link'
+import styled from '@emotion/styled'
+import { primary, secondary, darkGray } from '@colors'
+import Card from './Card'
+
+const StyledCard = styled(Card)`
+  display: grid;
+  gap: 0.5rem;
+`
 
 interface Props {
   work: string
@@ -12,7 +19,7 @@ interface Props {
 export default ({ work, name, description, created_at }: Props) => {
   const createdAt = dayjs(new Date(created_at)).format('MMM DD, YYYY')
   return (
-    <div className="root">
+    <StyledCard>
       <Link href="/c/[community]" as={`/c/${name}`}>
         <h2 className="work">{work}</h2>
       </Link>
@@ -20,14 +27,6 @@ export default ({ work, name, description, created_at }: Props) => {
       <p className="description">{description}</p>
       <h5 className="date">Created {createdAt}</h5>
       <style jsx>{`
-        .root {
-          display: grid;
-          gap: 0.5rem;
-          border: 1px solid ${secondary};
-          padding: 1rem;
-          border-radius: 3px;
-          background: white;
-        }
         .work {
           font-size: 2rem;
           color: ${primary};
@@ -48,6 +47,6 @@ export default ({ work, name, description, created_at }: Props) => {
           color: ${darkGray};
         }
       `}</style>
-    </div>
+    </StyledCard>
   )
 }

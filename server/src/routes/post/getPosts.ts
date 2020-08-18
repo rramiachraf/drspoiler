@@ -28,7 +28,7 @@ const getPosts = async (req: Request, res: Response) => {
     }
     res.send(rows)
   } catch ({ message: error }) {
-    res.status(404).send({ error })
+    res.status(404).send([])
   }
 }
 

@@ -26,10 +26,7 @@ route.post('/signup', signupValidation, async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10)
     const values = [username.toLowerCase(), email, hashedPassword]
     const { rows } = await pool.query(createNewUser, values)
-
-    res.status(201).send({
-      message: `welcome ${rows[0].username}, your account has been created`
-    })
+    res.status(201).send()
   } catch ({ message }) {
     res.status(400).send({ error: generateError(message) })
   }

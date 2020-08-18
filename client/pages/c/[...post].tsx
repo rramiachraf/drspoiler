@@ -3,25 +3,26 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import styled from '@emotion/styled'
 import CommunityLayout from '@components/CommunityLayout'
 import Comments from '@components/Comments/Main'
 import { Post, Community, Comment, State } from '@types'
 import ErrorPage from '../404'
-import {
-  primary,
-  secondary,
-  darkGray,
-  lightGreenGray,
-  lightShadow
-} from '@colors'
+import { primary, secondary, darkGray } from '@colors'
 import relativeTime from '@helpers/relativeTime'
 import { setComments } from '@actions/comments'
+import Card from '@components/Card'
 
 interface Props {
   post: Post
   community: Community
   comments: Comment[]
 }
+
+const StyledCard = styled(Card)`
+  display: grid;
+  gap: 0.3rem;
+`
 
 export default ({ post, community, comments: preComments }: Props) => {
   const dispatch = useDispatch()
@@ -65,7 +66,7 @@ interface PostPreviewProps {
 const PostPreview = ({ post }: PostPreviewProps) => {
   const { title, body, author, community, created_at } = post
   return (
-    <div className="root">
+    <StyledCard>
       <div className="posted">
         <Link href="/c/[community]" as={`/c/${community}`}>
           <span className="bold">c/{community}</span>
@@ -78,15 +79,6 @@ const PostPreview = ({ post }: PostPreviewProps) => {
       <h2 className="title">{title}</h2>
       <p className="body">{body}</p>
       <style jsx>{`
-        .root {
-          background: white;
-          display: grid;
-          gap: 0.3rem;
-          padding: 1rem;
-          border-radius: 3px;
-          border: 1px solid ${lightGreenGray};
-          box-shadow: 0 0 2px ${lightShadow};
-        }
         .title {
           font-size: 2rem;
           color: ${primary};
@@ -95,6 +87,7 @@ const PostPreview = ({ post }: PostPreviewProps) => {
           font-size: 1.4rem;
           line-height: 2rem;
           color: ${darkGray};
+          white-space: pre-line;
         }
         .posted {
           font-size: 1.2rem;
@@ -105,7 +98,7 @@ const PostPreview = ({ post }: PostPreviewProps) => {
           cursor: pointer;
         }
       `}</style>
-    </div>
+    </StyledCard>
   )
 }
 

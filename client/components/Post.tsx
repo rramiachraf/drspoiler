@@ -1,14 +1,9 @@
 import { darken } from 'polished'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {
-  primary,
-  secondary,
-  lightGreenGray,
-  lightShadow,
-  mediumGray
-} from '@colors'
+import { primary, secondary, mediumGray } from '@colors'
 import relativeTime from '@helpers/relativeTime'
+import Card from './Card'
 
 interface Props {
   post_id: number
@@ -32,7 +27,7 @@ export default ({
   const { community } = useRouter().query
   const url = `/c/${community}/p/${post_id}/${url_slug}`
   return (
-    <div className="root">
+    <Card>
       <div className="post">
         <span className="posted">
           Posted by <span className="author">{author}</span>{' '}
@@ -48,14 +43,6 @@ export default ({
       </div>
       <p>{no_comments}</p>
       <style jsx>{`
-        .root {
-          padding: 1rem;
-          border: 1px solid ${lightGreenGray};
-          margin-bottom: 0.3rem;
-          border-radius: 3px;
-          background: white;
-          box-shadow: 0 0 2px ${lightShadow};
-        }
         .post {
           display: grid;
           grid-template-rows: auto auto auto;
@@ -82,6 +69,6 @@ export default ({
           color: ${darken(0.2, mediumGray)};
         }
       `}</style>
-    </div>
+    </Card>
   )
 }
