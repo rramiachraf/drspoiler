@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+      - working-directory: ./server
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn db_init
