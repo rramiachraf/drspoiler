@@ -89,7 +89,7 @@ const AddPostForm = () => {
               placeholder="Body (Optional)"
               type="text"
             />
-            <Button type="submit">Post</Button>
+            <Button disabled={isSubmitting} type="submit">Post</Button>
           </StyledForm>
         </>
       )}

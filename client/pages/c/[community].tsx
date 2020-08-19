@@ -33,7 +33,7 @@ const CommunityPage = ({
   useEffect(() => {
     dispatch(setPosts(prePosts))
   }, [])
-  
+
   return (
     <>
       <Head>
@@ -45,28 +45,9 @@ const CommunityPage = ({
           <div className="root">
             <NewPost />
             {posts.length > 0 &&
-              posts.map(
-                ({
-                  post_id,
-                  title,
-                  author,
-                  created_at,
-                  body,
-                  url_slug,
-                  no_comment
-                }) => (
-                  <PostContainer
-                    key={post_id}
-                    post_id={post_id}
-                    title={title}
-                    author={author}
-                    created_at={created_at}
-                    body={body}
-                    no_comments={no_comment}
-                    url_slug={url_slug}
-                  />
-                )
-              )}
+              posts.map(post => (
+                <PostContainer post={post} community={community.name} />
+              ))}
             <style jsx>{`
               .root {
                 display: grid;
@@ -84,7 +65,9 @@ const CommunityPage = ({
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const url = process.env.API_URL
 
-  const communityResponse = await fetch(`${url}/c/${params?.community}`)
+  const communityResponse = await fetch(
+    `${url}/c/${params?.community}?limit=10`
+  )
   const community: Community = await communityResponse.json()
 
   const postsResponse = await fetch(`${url}/c/${params?.community}/posts`)

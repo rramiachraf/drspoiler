@@ -17,6 +17,10 @@ const Button = styled.button`
   &:active {
     background: ${secondary};
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `
 
 export default Button

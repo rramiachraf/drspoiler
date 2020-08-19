@@ -1,7 +1,7 @@
 import Header from './Header'
 import About from './About'
 import { Community } from '@types'
-import { secondary } from '@colors'
+import Container from './Container'
 
 interface Props {
   community: Community
@@ -14,41 +14,42 @@ export default ({ community, content }: Props) => {
   return (
     <>
       <Header />
-      <div className="root">
-        <div className="posts">{content}</div>
-        <div className="info">
-          {poster && <div className="poster" />}
-          <About
-            work={work}
-            name={name}
-            description={description}
-            created_at={created_at}
-          />
+      <Container>
+        <div className="root">
+          <div className="posts">{content}</div>
+          <div className="info">
+            {poster && <div className="poster" />}
+            <About
+              work={work}
+              name={name}
+              description={description}
+              created_at={created_at}
+            />
+          </div>
         </div>
-      </div>
-      <style jsx>
-        {`
-          .root {
-            padding: 1rem 10%;
-            display: grid;
-            grid-template-columns: 1fr 20rem;
-            gap: 1rem;
-          }
-          .info {
-            display: grid;
-            gap: 0.5rem;
-            grid-template-rows: 29rem auto 1fr;
-          }
-          .poster {
-            width: 20rem;
-            height: 29rem;
-            border-radius: 3px;
-            background-color: white;
-            background-image: url(${poster});
-            background-size: cover;
-          }
-        `}
-      </style>
+        <style jsx>
+          {`
+            .root {
+              display: grid;
+              grid-template-columns: 1fr 20rem;
+              gap: 1rem;
+            }
+            .info {
+              display: grid;
+              gap: 0.5rem;
+              grid-template-rows: 29rem auto 1fr;
+            }
+            .poster {
+              width: 20rem;
+              height: 29rem;
+              border-radius: 3px;
+              background-color: white;
+              background-image: url(${poster});
+              background-size: cover;
+            }
+          `}
+        </style>
+      </Container>
     </>
   )
 }

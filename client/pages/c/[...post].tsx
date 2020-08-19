@@ -2,27 +2,18 @@ import { GetServerSideProps } from 'next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
-import styled from '@emotion/styled'
 import CommunityLayout from '@components/CommunityLayout'
 import Comments from '@components/Comments/Main'
-import { Post, Community, Comment, State } from '@types'
 import ErrorPage from '../404'
-import { primary, secondary, darkGray } from '@colors'
-import relativeTime from '@helpers/relativeTime'
 import { setComments } from '@actions/comments'
-import Card from '@components/Card'
+import PostPreview from '@components/Post'
+import { Post, Community, Comment, State } from '@types'
 
 interface Props {
   post: Post
   community: Community
   comments: Comment[]
 }
-
-const StyledCard = styled(Card)`
-  display: grid;
-  gap: 0.3rem;
-`
 
 export default ({ post, community, comments: preComments }: Props) => {
   const dispatch = useDispatch()
@@ -44,7 +35,7 @@ export default ({ post, community, comments: preComments }: Props) => {
         community={community}
         content={
           <div className="root">
-            <PostPreview post={post} />
+            <PostPreview post={post} full={true} community={community.name} />
             <Comments comments={comments} op={post.author} />
             <style jsx>{`
               .root {
@@ -56,49 +47,6 @@ export default ({ post, community, comments: preComments }: Props) => {
         }
       />
     </>
-  )
-}
-
-interface PostPreviewProps {
-  post: Post
-}
-
-const PostPreview = ({ post }: PostPreviewProps) => {
-  const { title, body, author, community, created_at } = post
-  return (
-    <StyledCard>
-      <div className="posted">
-        <Link href="/c/[community]" as={`/c/${community}`}>
-          <span className="bold">c/{community}</span>
-        </Link>{' '}
-        &#8226; Posted by <span className="bold">u/{author}</span>{' '}
-        <span title={new Date(created_at).toDateString()}>
-          {relativeTime(created_at)}
-        </span>
-      </div>
-      <h2 className="title">{title}</h2>
-      <p className="body">{body}</p>
-      <style jsx>{`
-        .title {
-          font-size: 2rem;
-          color: ${primary};
-        }
-        .body {
-          font-size: 1.4rem;
-          line-height: 2rem;
-          color: ${darkGray};
-          white-space: pre-line;
-        }
-        .posted {
-          font-size: 1.2rem;
-          color: ${secondary};
-        }
-        .posted > span.bold {
-          font-weight: 500;
-          cursor: pointer;
-        }
-      `}</style>
-    </StyledCard>
   )
 }
 

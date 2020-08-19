@@ -1,18 +1,11 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
-import { FaSignOutAlt } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
+import { lighten } from 'polished'
+import { useSelector } from 'react-redux'
 import { primary, tertiary } from '@colors'
 import StandardButton from './Button'
 import useLoggedStatus from '../hooks/useLoggedStatus'
-import { setLogoutAsync } from '@actions/auth'
-
-const Logout = styled(FaSignOutAlt)`
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-`
+import { State } from '@types'
 
 export default () => {
   const logged = useLoggedStatus()
@@ -66,21 +59,33 @@ const Button = ({ href, display }: Button) => (
   </Link>
 )
 
+const Username = styled.span`
+  color: white;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.8rem 1.5rem;
+  background: ${lighten(0.05, primary)};
+  border-radius: 100px;
+`
+
 interface LoggedUserProps {
   logged: null | boolean
 }
 
 const LoggedUser = ({ logged }: LoggedUserProps) => {
-  const route = useRouter()
-  const dispatch = useDispatch()
-  const logout = () => {
-    dispatch(setLogoutAsync(route))
-  }
+  const { username } = useSelector(({ user }: State) => user)
+  const profileURL = `/u/${username}`
   if (logged === null) {
     return <div></div>
   }
   if (logged === true) {
-    return <Logout onClick={logout} />
+    return (
+      <Link href="/u/[username]" as={profileURL}>
+        <Username>{username}</Username>
+      </Link>
+    )
   }
   return (
     <>

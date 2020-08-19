@@ -30,11 +30,13 @@ export interface Comment {
 
 export interface User {
   username: string
+  join_date: string
+  no_posts: number
 }
 
 export interface State {
   comments: Comment[]
   logged: boolean | null
-  user: User,
+  user: User
   posts: Post[]
 }
