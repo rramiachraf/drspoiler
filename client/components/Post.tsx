@@ -62,7 +62,7 @@ const Author = styled.span`
   cursor: pointer;
   background: ${primary};
   color: white;
-  padding: 0 0.5rem;
+  padding: 0 0.8rem;
 `
 
 const Body = styled.p`
@@ -80,7 +80,7 @@ const Body = styled.p`
 const Community = styled.span`
   background: ${secondary};
   color: white;
-  padding: 0 0.5rem;
+  padding: 0 0.8rem;
   font-size: 1.3rem;
   cursor: pointer;
 `
