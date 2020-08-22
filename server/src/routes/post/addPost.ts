@@ -12,7 +12,7 @@ const query = `
     )
     RETURNING post_id, 
     title, SUBSTRING(body, 1, 300) || '...' AS body, 
-    (SELECT username FROM main.users WHERE user_id = author) AS author, 
+    (SELECT username FROM main.users WHERE user_id = author LIMIT 1) AS author, 
     url_slug, created_at
 `
 

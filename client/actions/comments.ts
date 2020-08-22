@@ -27,8 +27,8 @@ export const addCommentAsync = (post: string, text: string) => {
       }
     }
     const response = await fetch(url, options)
-    const newComment = await response.json()
     if (response.status === 201) {
+      const newComment = await response.json()
       dispatch(addComment(newComment))
     }
   }

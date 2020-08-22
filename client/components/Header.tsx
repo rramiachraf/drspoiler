@@ -51,6 +51,7 @@ interface Button {
 
 const StyledButton = styled(StandardButton)`
   background: ${tertiary};
+  padding: 0.8rem 2rem;
 `
 
 const Button = ({ href, display }: Button) => (

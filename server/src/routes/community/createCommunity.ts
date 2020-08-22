@@ -10,7 +10,6 @@ const createNewCommunity = `
 `
 
 const createCommunity = async (req: Request, res: Response) => {
-  const { userId } = req
   const { name, work, description } = req.body
 
   try {
@@ -22,9 +21,9 @@ const createCommunity = async (req: Request, res: Response) => {
       name,
       work,
       description,
-      userId
+      req.session!.userId
     ])
-    res.send({ message: `${rows[0].name} has been created` })
+    res.status(201).send(rows[0])
   } catch ({ message }) {
     res.status(400).send({ error: generateError(message) })
   }

@@ -5,11 +5,11 @@ const query = `
     INSERT INTO main.comments (text, post_id, user_id)
     VALUES($1, $2, $3)
     RETURNING 
-    comment_id, 
+    comment_id,
     text,
     post_id,
-    (SELECT username FROM main.users WHERE user_id = user_id) AS username, 
-    created_at, 
+    (SELECT username FROM main.users WHERE main.users.user_id = main.comments.user_id) AS username,
+    created_at,
     updated_at
 `
 
@@ -21,8 +21,8 @@ const addComment = async (req: Request, res: Response) => {
       req.session!.userId
     ])
     res.status(201).send(rows[0])
-  } catch ({ message: error }) {
-    res.status(400).send({ error })
+  } catch (e) {
+    res.status(400).send()
   }
 }
 
