@@ -18,7 +18,7 @@ export const setLogoutAsync = (route: NextRouter) => {
     const request = new Request(url, { method: 'POST', credentials: 'include' })
     const { status } = await fetch(request)
     if (status === 200) {
-      route.push('/login')
+      route.replace('/')
       dispatch(setLogout())
     }
   }

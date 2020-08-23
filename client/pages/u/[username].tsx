@@ -2,18 +2,14 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import styled from '@emotion/styled'
 import { FaUserCircle } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
 import { User, Post, State } from '@types'
 import Header from '@components/Header'
 import Container from '@components/Container'
 import Card from '@components/Card'
-import { setLogoutAsync } from '@actions/auth'
 import dayjs from 'dayjs'
 import { primary, darkGray } from '@colors'
 import Error from '../404'
 import PostPreview from '@components/Post'
-import Button from '@components/Button'
 
 interface Props {
   user: User
@@ -32,7 +28,7 @@ const Profile = styled.div`
 
 const Info = styled(Card)`
   display: grid;
-  height: ${({ logged }: InfoProps) => (logged ? '25rem' : '20rem')};
+  height: 20rem;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -61,12 +57,6 @@ export default ({ user, posts }: Props) => {
   if (!username) {
     return <Error />
   }
-  const route = useRouter()
-  const dispatch = useDispatch()
-  const logged = useSelector(({ logged }: State) => logged)
-  const logout = () => {
-    dispatch(setLogoutAsync(route))
-  }
   const joined = dayjs(new Date(join_date)).format('MMMM YYYY')
   return (
     <>
@@ -86,11 +76,10 @@ export default ({ user, posts }: Props) => {
               />
             ))}
           </Posts>
-          <Info logged={logged}>
+          <Info>
             <UnknownUser />
             <h4>u/{username}</h4>
             <small>Joined {joined}</small>
-            {logged === true && <Button onClick={logout}>Logout</Button>}
           </Info>
         </Profile>
       </Container>

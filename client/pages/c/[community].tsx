@@ -46,7 +46,11 @@ const CommunityPage = ({
             <NewPost />
             {posts.length > 0 &&
               posts.map(post => (
-                <PostContainer post={post} community={community.name} />
+                <PostContainer
+                  key={post.post_id}
+                  post={post}
+                  community={community.name}
+                />
               ))}
             <style jsx>{`
               .root {

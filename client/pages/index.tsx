@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import styled from '@emotion/styled'
-import Header from '@components/Header'
 import { secondary, primary, tertiary } from '@colors'
 import Button from '@components/Button'
 import { rgba } from 'polished'
 import Link from 'next/link'
+import useLoggedStatus from 'hooks/useLoggedStatus'
+import { useRouter } from 'next/router'
 
 const Home = styled.div`
   background: linear-gradient(
@@ -62,6 +63,11 @@ const Login = styled(Button)`
 `
 
 export default () => {
+  const logged = useLoggedStatus()
+  const route = useRouter()
+  if(logged === true){
+    route.push('/dashboard')
+  }
   return (
     <>
       <Head>
