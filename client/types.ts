@@ -16,6 +16,7 @@ export interface Community {
   work: string
   description: string
   poster: string | null
+  created_by: string
   created_at: string
 }
 

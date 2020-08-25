@@ -36,9 +36,9 @@ route.post('/login', loginValidation, async (req: Request, res: Response) => {
     req.session!.userId = rows[0].user_id
     req.session!.userAgent = req.header('user-agent')
 
-    res.send({
-      message: `Welcome back ${rows[0].username}`
-    })
+    const { username } = rows[0]
+
+    res.send({ username })
   } catch ({ message }) {
     res.status(401).send({ message })
   }

@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import Head from 'next/head'
@@ -13,17 +14,21 @@ interface Props {
   post: Post
   community: Community
   comments: Comment[]
+  edit: string
 }
 
-export default ({ post, community, comments: preComments }: Props) => {
+export default ({ post, community, comments: preComments, edit }: Props) => {
   const dispatch = useDispatch()
   const comments = useSelector(({ comments }: State) => comments)
-  useEffect(() => {
-    dispatch(setComments(preComments))
-  }, [])
+  if (edit.toLowerCase() === 'edit') {
+    return <EditCommunity community={community} />
+  }
   if (post.error) {
     return <ErrorPage />
   }
+  useEffect(() => {
+    dispatch(setComments(preComments))
+  }, [])
   return (
     <>
       <Head>
@@ -50,9 +55,19 @@ export default ({ post, community, comments: preComments }: Props) => {
   )
 }
 
+interface EditCommunityProps {
+  community: Community
+}
+
+const EditCommunity = ({community}:EditCommunityProps) => (
+  <div>
+    <h1>Edit {community.name}</h1>
+  </div>
+)
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const url = process.env.API_URL
-  const [c, , p] = params?.post as string[]
+  const [c, edit, p] = params?.post as string[]
   const postResponse = await fetch(`${url}/c/${c}/p/${p}`)
   const post: Post = await postResponse.json()
   const communityResponse = await fetch(`${url}/c/${c}`)
@@ -65,7 +80,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     props: {
       post,
       community,
-      comments
+      comments,
+      edit
     }
   }
 }

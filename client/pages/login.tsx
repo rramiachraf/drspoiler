@@ -6,6 +6,8 @@ import Header from '@components/Header'
 import StandardInput from '@components/Input'
 import { primary } from '@colors'
 import { setLogin } from '@actions/auth'
+import { setUserInfo } from '@actions/user'
+import { useRouter } from 'next/router'
 
 const Input = StandardInput.withComponent(Field)
 
@@ -31,6 +33,7 @@ export default () => (
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const route = useRouter()
   const initialValues = {
     username: '',
     password: ''
@@ -55,7 +58,10 @@ const LoginForm = () => {
             username: 'Incorrect username or password'
           })
         }
+        const info = await response.json()
+        dispatch(setUserInfo(info))
         dispatch(setLogin())
+        route.push('/dashboard')
       }}
     >
       {({ isSubmitting, errors }) => (

@@ -7,7 +7,7 @@ const darkGray = '#363636'
 const lightDarkWhite = '#f4f6ff'
 const lightGreenGray = '#cedebd'
 const mediumGray = '#9f9f9f'
-const danger = '#ff5c5c'
+const danger = '#ce3838'
 
 const lightShadow = lighten(0.8, 'black')
 

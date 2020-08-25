@@ -72,7 +72,6 @@ export default () => {
     <>
       <Head>
         <title>drspoiler</title>
-        <link rel="icon" href="/logo.png" />
       </Head>
       <Home>
         <div></div>

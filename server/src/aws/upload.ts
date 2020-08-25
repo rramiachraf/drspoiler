@@ -1,15 +1,12 @@
-import { config, S3 } from 'aws-sdk'
+import { S3 } from 'aws-sdk'
 import multer from 'multer'
 import S3Storage from 'multer-sharp-s3'
 import { AWS_accessKeyId, AWS_secretAccessKey } from '../config'
 
-config.update({
+export const s3 = new S3({
   secretAccessKey: AWS_secretAccessKey,
-  accessKeyId: AWS_accessKeyId,
-  region: 'us-east-1'
+  accessKeyId: AWS_accessKeyId
 })
-
-export const s3 = new S3()
 
 export const uploadArtwork = multer({
   fileFilter: (req, { originalname }, cb) => {
@@ -35,7 +32,7 @@ export const uploadArtwork = multer({
     toFormat: 'jpg',
     ACL: 'public-read',
     Key: (req: any, file: any, cb: any) => {
-      const artworkKey = req.params.community
+      const artworkKey = req.params.community.toLowerCase()
       req.artworkKey = artworkKey
       cb(null, artworkKey)
     }
