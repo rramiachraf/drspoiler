@@ -9,6 +9,7 @@ import ErrorPage from '../404'
 import { setComments } from '@actions/comments'
 import PostPreview from '@components/Post'
 import { Post, Community, Comment, State } from '@types'
+import EditCommunity from '@components/EditCommunity'
 
 interface Props {
   post: Post
@@ -33,7 +34,7 @@ export default ({ post, community, comments: preComments, edit }: Props) => {
     <>
       <Head>
         <title>
-          {post.title} : {community.name}
+          {post.title}: {community.name}
         </title>
       </Head>
       <CommunityLayout
@@ -54,16 +55,6 @@ export default ({ post, community, comments: preComments, edit }: Props) => {
     </>
   )
 }
-
-interface EditCommunityProps {
-  community: Community
-}
-
-const EditCommunity = ({community}:EditCommunityProps) => (
-  <div>
-    <h1>Edit {community.name}</h1>
-  </div>
-)
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const url = process.env.API_URL

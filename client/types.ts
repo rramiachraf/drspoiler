@@ -31,6 +31,7 @@ export interface Comment {
 
 export interface User {
   username: string
+  user_id: number
   join_date: string
   no_posts: number
 }

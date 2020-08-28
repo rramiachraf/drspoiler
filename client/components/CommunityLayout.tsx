@@ -108,7 +108,7 @@ export default ({ community, content }: Props) => {
             </div>
             {moderator && (
               <OptionsContainer>
-                <Link href={`/c/${name}/edit`}>
+                <Link href="/c/[...post]" as={`/c/${name}/edit`}>
                   <Option>
                     <FaEdit />
                   </Option>

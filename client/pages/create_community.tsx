@@ -10,7 +10,7 @@ import { primary } from '@colors'
 
 const CreateCommunity = styled(Form)`
   text-align: center;
-  padding: 1rem 50rem;
+  padding: 1rem 20%;
   display: grid;
   gap: 1rem;
   h1 {

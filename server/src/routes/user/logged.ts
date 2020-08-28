@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import pool from '../../database'
 
 const query = `
-  SELECT username FROM main.users
+  SELECT username, user_id FROM main.users
   WHERE user_id = $1
 `
 
