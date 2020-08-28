@@ -14,12 +14,10 @@ const deleteCommunity = async (req: Request, res: Response) => {
   try {
     const { community } = req.params
     const { rows } = await pool.query(deleteCommunityQuery, [community])
-    const { name, poster } = rows[0]
-    const options = { Key: parse(poster).base, Bucket }
-    if (poster) {
-      await deleteObject(options)
-    }
-    res.send({ message: `${name} has been deleted` })
+    const { name } = rows[0]
+    const options = { Key: `${name}.jpg`, Bucket }
+    await deleteObject(options)
+    res.send()
   } catch ({ message: error }) {
     res.status(500).send({ error })
   }

@@ -12,10 +12,11 @@ export interface Post {
 }
 
 export interface Community {
+  id: number
   name: string
   work: string
   description: string
-  poster: string | null
+  poster: string
   created_by: string
   created_at: string
 }
