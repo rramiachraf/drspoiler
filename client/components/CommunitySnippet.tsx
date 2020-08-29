@@ -35,6 +35,7 @@ const Poster = styled.div`
   border-radius: 3px;
   height: 6rem;
   background-size: cover;
+  background-position: center;
   align-self: center;
 `
 

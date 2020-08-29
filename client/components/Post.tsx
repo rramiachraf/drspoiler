@@ -51,7 +51,7 @@ const DeleteButton = styled(Button)`
   }
 `
 
-const Title = styled.h2`
+const Title = styled.h1`
   color: ${primary};
   cursor: ${({ full }: EmotionProps) => (full ? 'text' : 'pointer')};
   font-size: ${({ full }: EmotionProps) => (full ? '2rem' : '1.8rem')};

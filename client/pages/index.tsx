@@ -1,11 +1,11 @@
-import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 import styled from '@emotion/styled'
 import { secondary, primary, tertiary } from '@colors'
 import Button from '@components/Button'
 import { rgba } from 'polished'
 import Link from 'next/link'
 import useLoggedStatus from 'hooks/useLoggedStatus'
-import { useRouter } from 'next/router'
 
 const Home = styled.div`
   background: linear-gradient(
@@ -65,19 +65,21 @@ const Login = styled(Button)`
 export default () => {
   const logged = useLoggedStatus()
   const route = useRouter()
-  if(logged === true){
+  const description = 'The worst website on the internet'
+  if (logged === true) {
     route.push('/dashboard')
   }
   return (
     <>
-      <Head>
-        <title>drspoiler</title>
-      </Head>
+      <NextSeo
+        title="drspoiler: Ruin your experience"
+        description={description}
+      />
       <Home>
         <div></div>
         <Main>
           <h1>drspoiler.com</h1>
-          <p>The worst website on the internet</p>
+          <p>{description}</p>
           <ButtonsArea>
             <Link href="/signup">
               <JoinUs>Join Us</JoinUs>

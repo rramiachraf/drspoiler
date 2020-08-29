@@ -1,8 +1,7 @@
 import { GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import CommunityLayout from '@components/CommunityLayout'
 import Comments from '@components/Comments/Main'
 import ErrorPage from '../404'
@@ -32,11 +31,10 @@ export default ({ post, community, comments: preComments, edit }: Props) => {
   }, [])
   return (
     <>
-      <Head>
-        <title>
-          {post.title}: {community.name}
-        </title>
-      </Head>
+      <NextSeo
+        title={`${post.title}: ${community.name}`}
+        description={post.body.slice(0, 120) + '...'}
+      />
       <CommunityLayout
         community={community}
         content={

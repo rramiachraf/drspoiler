@@ -12,7 +12,7 @@ export interface Post {
 }
 
 export interface Community {
-  id: number
+  community_id: number
   name: string
   work: string
   description: string

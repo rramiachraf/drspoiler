@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import styled from '@emotion/styled'
+import { NextSeo } from 'next-seo'
 import { primary } from '@colors'
 import Header from '@components/Header'
 import Container from '@components/Container'
@@ -26,15 +26,13 @@ interface Props {
 
 export default ({ communities }: Props) => (
   <>
-    <Head>
-      <title>Dashboard</title>
-    </Head>
+    <NextSeo title="Dashboard" noindex={true} />
     <Header />
     <Container>
       <Main>
         <Title>Explore Communities</Title>
         {communities.map(community => (
-          <Snippet key={community.id} community={community} />
+          <Snippet key={community.community_id} community={community} />
         ))}
       </Main>
     </Container>

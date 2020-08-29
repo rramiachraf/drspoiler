@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import ErrorPage from '../404'
@@ -24,7 +24,7 @@ const CommunityPage = ({
   const dispatch = useDispatch()
   const posts = useSelector((state: State) => state.posts)
 
-  const { name } = community
+  const { name, work, description } = community
 
   if (communityStatus === 404) {
     return <ErrorPage />
@@ -36,9 +36,12 @@ const CommunityPage = ({
 
   return (
     <>
-      <Head>
-        <title>{name}</title>
-      </Head>
+      <NextSeo
+        title={`${work} - drspoiler`}
+        description={`c/${name}: ${description.slice(0, 120)}${
+          description.length > 120 && '...'
+        }`}
+      />
       <CommunityLayout
         community={community}
         content={
