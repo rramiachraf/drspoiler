@@ -7,6 +7,7 @@ import Button from '@components/Button'
 import InputComponent from '@components/Input'
 import { State } from '@types'
 import { primary } from '@colors'
+import { NextSeo } from 'next-seo'
 
 const CreateCommunity = styled(Form)`
   text-align: center;
@@ -34,6 +35,7 @@ export default () => {
   }
   return (
     <>
+      <NextSeo title="Create new community" noindex={true} />
       <Header />
       {logged === true && (
         <Formik

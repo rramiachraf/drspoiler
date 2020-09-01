@@ -6,5 +6,5 @@ export default styled.div`
   padding: 1rem;
   border: 1px solid ${lightGreenGray};
   border-radius: 3px;
-  box-shadow: 0 0 2px ${lightShadow};
+  /* box-shadow: 0 0 2px ${lightShadow}; */
 `

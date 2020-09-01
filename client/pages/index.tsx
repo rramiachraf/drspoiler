@@ -66,9 +66,6 @@ export default () => {
   const logged = useLoggedStatus()
   const route = useRouter()
   const description = 'The worst website on the internet'
-  if (logged === true) {
-    route.push('/dashboard')
-  }
   return (
     <>
       <NextSeo
