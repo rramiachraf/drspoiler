@@ -1,17 +1,15 @@
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import Loading from '@components/Loading'
-import { State } from '@types'
 import useLoggedStatus from 'hooks/useLoggedStatus'
+import { ReactNode, ReactElement } from 'react'
 
 interface Props {
-  page: any
+  children: any
 }
 
-export default ({ page: Page }: Props) => {
+export default ({ children }: Props): ReactElement => {
   const logged = useLoggedStatus()
   const route = useRouter()
-  console.log(logged)
 
   if (logged === null) {
     return <Loading />
@@ -22,5 +20,5 @@ export default ({ page: Page }: Props) => {
     return <Loading />
   }
 
-  return <Page />
+  return children
 }

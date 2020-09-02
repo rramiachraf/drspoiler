@@ -112,9 +112,9 @@ export default ({ post, full, community, profile }: Props) => {
                 <Community title={`c/${community}`}>{community}</Community>
               </Link>
             )}
-            <Link href="/u/[username]" as={profileURL}>
+            {!profile && <Link href="/u/[username]" as={profileURL}>
               <Author title={`u/${author.toLowerCase()}`}>{author}</Author>
-            </Link>{' '}
+            </Link>}{' '}
             <span title={new Date(created_at).toDateString()}>
               {relativeTime(created_at)}
             </span>

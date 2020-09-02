@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { State } from '@types'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
+import ProtectedRoute from '@components/ProtectedRoute'
 
 const Settings = styled(Container)`
   display: grid;
@@ -63,7 +64,7 @@ interface Props {
 export default ({ username, email }: Props) => {
   const [open, setOpen] = useState('general')
   return (
-    <>
+    <ProtectedRoute>
       <NextSeo title="Settings" noindex={true} />
       <Header />
       <Settings>
@@ -77,7 +78,7 @@ export default ({ username, email }: Props) => {
           <Renderer data={{ username, email }} open={open} />
         </Content>
       </Settings>
-    </>
+    </ProtectedRoute>
   )
 }
 
@@ -185,7 +186,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     headers: { Cookie: req.headers.cookie! }
   })
   const { username, email } = await response.json()
-  return {
-    props: { username, email }
+
+  if (username && email) {
+    return { props: { username, email } }
   }
+
+  return { props: {} }
 }

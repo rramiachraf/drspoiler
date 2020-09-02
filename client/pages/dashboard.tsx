@@ -6,6 +6,7 @@ import Container from '@components/Container'
 import Snippet from '@components/CommunitySnippet'
 import { GetServerSideProps } from 'next'
 import { Community } from '@types'
+import ProtectedRoute from '@components/ProtectedRoute'
 
 const Title = styled.h1`
   color: ${primary};
@@ -25,7 +26,7 @@ interface Props {
 }
 
 export default ({ communities }: Props) => (
-  <>
+  <ProtectedRoute>
     <NextSeo title="Dashboard" noindex={true} />
     <Header />
     <Container>
@@ -36,7 +37,7 @@ export default ({ communities }: Props) => (
         ))}
       </Main>
     </Container>
-  </>
+  </ProtectedRoute>
 )
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
@@ -45,5 +46,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     headers: { Cookie: req.headers.cookie! }
   })
   const communities: Community[] = await response.json()
-  return { props: { communities } }
+  if (response.status === 200) {
+    return { props: { communities } }
+  }
+  return { props: { communities: [] } }
 }

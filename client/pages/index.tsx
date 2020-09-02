@@ -69,7 +69,7 @@ export default () => {
   return (
     <>
       <NextSeo
-        title="drspoiler: Ruin your experience"
+        title="drspoiler: ruin your experience"
         description={description}
       />
       <Home>
