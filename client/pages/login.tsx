@@ -9,6 +9,7 @@ import { setLogin } from '@actions/auth'
 import { setUserInfo } from '@actions/user'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
+import PublicRoute from '@components/PublicRoute'
 
 const Input = StandardInput.withComponent(Field)
 
@@ -26,14 +27,14 @@ const validationSchema = Yup.object({
 })
 
 export default () => (
-  <>
+  <PublicRoute>
     <NextSeo
       title="Login - drspoiler"
       description="Login to your account and start posting spoilers"
     />
     <Header />
     <LoginForm />
-  </>
+  </PublicRoute>
 )
 
 const LoginForm = () => {
