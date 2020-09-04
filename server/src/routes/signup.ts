@@ -11,7 +11,7 @@ const createNewUser = `
   INSERT INTO 
   main.users(username, email, password) 
   VALUES($1, $2, $3)
-  RETURNING username
+  RETURNING user_id
 `
 
 route.post('/signup', signupValidation, async (req: Request, res: Response) => {
@@ -26,6 +26,8 @@ route.post('/signup', signupValidation, async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10)
     const values = [username.toLowerCase(), email, hashedPassword]
     const { rows } = await pool.query(createNewUser, values)
+    req.session!.userId = rows[0].user_id
+    req.session!.userAgent = req.header('user-agent')
     res.status(201).send()
   } catch ({ message }) {
     res.status(400).send({ error: generateError(message) })

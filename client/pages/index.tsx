@@ -6,6 +6,7 @@ import Button from '@components/Button'
 import { rgba } from 'polished'
 import Link from 'next/link'
 import useLoggedStatus from 'hooks/useLoggedStatus'
+import PublicRoute from '@components/PublicRoute'
 
 const Home = styled.div`
   background: linear-gradient(
@@ -67,7 +68,7 @@ export default () => {
   const route = useRouter()
   const description = 'The worst website on the internet'
   return (
-    <>
+    <PublicRoute>
       <NextSeo
         title="drspoiler: ruin your experience"
         description={description}
@@ -88,6 +89,6 @@ export default () => {
         </Main>
         <div></div>
       </Home>
-    </>
+    </PublicRoute>
   )
 }

@@ -52,6 +52,14 @@ const Posts = styled.div`
   gap: 0.3rem;
 `
 
+const NoPosts = styled(Card)`
+  height: 5rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+`
+
 export default ({ user, posts }: Props) => {
   const { username, no_posts, join_date } = user
   if (!username) {
@@ -67,6 +75,7 @@ export default ({ user, posts }: Props) => {
       <Container>
         <Profile>
           <Posts>
+            {posts.length === 0 && <NoPosts>No posts by {username}</NoPosts>}
             {posts.map(post => (
               <PostPreview
                 key={post.post_id}

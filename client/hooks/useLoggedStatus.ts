@@ -11,7 +11,8 @@ const useLoggedStatus = () => {
   const checkStatus = async (url: string) => {
     const request = new Request(url, { credentials: 'include' })
     const response = await fetch(request)
-    if (response.status === 200) {
+    const { status } = response
+    if (status === 200) {
       const body = await response.json()
       dispatch(setLogin())
       dispatch(setUserInfo(body))

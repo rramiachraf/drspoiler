@@ -4,26 +4,33 @@ import { useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import Header from '@components/Header'
 import StandardInput from '@components/Input'
-import { primary } from '@colors'
 import { setLogin } from '@actions/auth'
 import { setUserInfo } from '@actions/user'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import PublicRoute from '@components/PublicRoute'
+import Button from '@components/Button'
+import StandardContainer from '@components/Container'
+import Error from '@components/Error'
 
 const Input = StandardInput.withComponent(Field)
 
-const StyledForm = styled(Form)`
-  height: calc(100vh - 5rem);
+const Container = styled(StandardContainer)`
   display: grid;
-  justify-content: center;
-  align-items: center;
+  height: calc(100vh - 7rem);
+  gap: 1rem;
+  grid-template-rows: 1fr auto 1fr;
+`
+
+const StyledForm = styled(Form)`
+  display: grid;
   gap: 0.5rem;
+  padding: 0 20rem;
 `
 
 const validationSchema = Yup.object({
-  username: Yup.string().required('This field is required'),
-  password: Yup.string().min(6).required('This field is required')
+  username: Yup.string().required().min(3),
+  password: Yup.string().min(8).required()
 })
 
 export default () => (
@@ -70,30 +77,24 @@ const LoginForm = () => {
         route.push('/dashboard')
       }}
     >
-      {({ isSubmitting, errors }) => (
-        <div>
+      {({ isSubmitting, errors, touched }) => (
+        <Container>
+          <div></div>
           <StyledForm>
+            {touched.username && errors.username && (
+              <Error>{errors.username}</Error>
+            )}
+            {touched.password && errors.password && (
+              <Error>{errors.password}</Error>
+            )}
             <Input name="username" type="text" placeholder="Username" />
             <Input name="password" type="password" placeholder="Password" />
-            <button className="button" type="submit" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               Login
-            </button>
+            </Button>
           </StyledForm>
-          <style jsx>{`
-            .button {
-              width: 30rem;
-              height: 5rem;
-              background: ${primary};
-              border: none;
-              color: white;
-              font-family: inherit;
-              text-transform: uppercase;
-              cursor: pointer;
-              font-weight: 500;
-              border-radius: 100px;
-            }
-          `}</style>
-        </div>
+          <div></div>
+        </Container>
       )}
     </Formik>
   )
