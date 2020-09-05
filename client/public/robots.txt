@@ -1,0 +1,10 @@
+# robots.txt for drspoiler.com
+# 2020
+
+User-agent: *
+Disallow:/api/
+Crawl-delay:5
+
+User-agent:wget
+Disallow:/
+Crawl-delay:30
