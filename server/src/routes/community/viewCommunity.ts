@@ -16,6 +16,7 @@ const viewCommunity = async (req: Request, res: Response) => {
     if (rowCount === 0) {
       throw Error('community not found')
     }
+    res.setHeader('Cache-Control', 'max-age=86400')
     res.send(rows[0])
   } catch ({ message }) {
     res.status(404).send({ error: message })

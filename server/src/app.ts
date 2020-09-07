@@ -1,6 +1,5 @@
 import express from 'express'
 import helmet from 'helmet'
-import compression from 'compression'
 import cors from 'cors'
 import session from 'express-session'
 import pgSession from 'connect-pg-simple'
@@ -15,16 +14,24 @@ import comment from './routes/comments'
 import logged from './routes/user/logged'
 import auth from './middlewares/auth'
 import communities from './routes/community/communities'
+import rateLimit from './middlewares/rateLimit'
 
 const app = express()
+
+app.enable('trust proxy')
+
+app.use(helmet())
+
+app.use(rateLimit)
 
 app.use(
   session({
     name: 'sid',
     store: new (pgSession(session))({ pool }),
-    secret: '1598753',
+    secret: process.env.COOKIE_SECRET!,
     resave: false,
     saveUninitialized: true,
+    proxy: process.env.NODE_ENV === 'production' && true,
     cookie: {
       secure: process.env.NODE_ENV === 'production' && true,
       sameSite: 'strict',
@@ -39,8 +46,6 @@ app.use(
     origin: ['http://localhost:3000', 'https://drspoiler.com']
   })
 )
-app.use(compression({ level: 9 }))
-app.use(helmet())
 
 app.use(express.json())
 
