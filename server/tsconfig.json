@@ -13,6 +13,7 @@
       "@middlewares/*": ["middlewares/*"],
       "@helpers/*": ["helpers/*"]
     },
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "resolveJsonModule": true
   }
 }
